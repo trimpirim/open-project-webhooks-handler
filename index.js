@@ -5,7 +5,7 @@ const moment = require('moment');
 
 function respond(req, res, next) {
     const stream = fs.createWriteStream(`${__dirname}/logs/requests.log`, {flags: 'a+'});
-    stream.write(`[${moment().format('YYYY-MM-DD hh:mm:ss')}] ${util.format.apply(null, [req.body])}\n`);
+    stream.write(`[${moment().format('YYYY-MM-DD hh:mm:ss')}] ${util.format.apply(null, [JSON.stringify(req.body)])}\n`);
     res.send({success: true});
     next();
 }
